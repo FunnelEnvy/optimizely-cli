@@ -1,0 +1,21 @@
+{
+  "name": "optimizely_powertool",
+  "version": "0.0.1",
+  "description": "Command line power for Optimizely",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Arun Sivashankaran",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^2.3.2",
+    "lodash": "^2.4.1",
+    "opener": "^1.4.0",
+    "restler": "^3.2.2",
+    "yargs": "^1.3.1"
+  },
+  "bin": {
+    "optpt": "bin/optpt.js"
+  }
+}
