@@ -1,10 +1,11 @@
 {
   "name": "optin",
   "version": "0.0.1",
-  "description": "Command line power for Optimizely",
-  "main": "main.js",
+  "description": "Command line power tool for Optimizely",
+  "main": "index.js",
   "bin": {
-    "optpt": "bin/optpt.js"
+    "optpt": "bin/optpt.js",
+    "optin": "bin/optin.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,8 +23,11 @@
   "license": "ISC",
   "dependencies": {
     "bluebird": "^2.3.2",
+    "commander": "^2.5.0",
     "lodash": "^2.4.1",
     "opener": "^1.4.0",
+    "promptly": "^0.2.0",
+    "q": "^1.1.2",
     "restler": "^3.2.2",
     "yargs": "^1.3.1"
   },

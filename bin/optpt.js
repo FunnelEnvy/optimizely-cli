@@ -34,10 +34,10 @@ optClient.getExperimentByDescription(experimentConfig['project_id'], experimentC
   })
   .spread(function(data, results) {
     //create or update the variations
-    //for the first one just update the one that's precreated 
+    //for the first one just update the one that's precreated
     console.log('updating the first variaton');
     firstVar = experimentConfig.variations[0];
-    return optClient.updateVariation(data.variation_ids[1], 
+    return optClient.updateVariation(data.variation_ids[1],
                                      {'js_component': fs.readFileSync('variations/' + firstVar['js_component_file']).toString(),
                                        'description': firstVar.description
                                      });
@@ -45,5 +45,3 @@ optClient.getExperimentByDescription(experimentConfig['project_id'], experimentC
   .error(function(e) {
       console.error("unable to continue: ", e.message);
   });
-
-

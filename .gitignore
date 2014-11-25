@@ -167,3 +167,5 @@ pip-log.txt
 
 # Node
 node_modules/
+
+.optin/
