@@ -1,24 +1,24 @@
 {
   "name": "optin",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "description": "Command line power for Optimizely",
   "main": "main.js",
   "bin": {
-      "optpt": "bin/optpt.js"
+    "optpt": "bin/optpt.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": "git@bitbucket.org:funnelenvy/optimizely_powertool.git",
   "keywords": [
-      "optimizely",
-      "cli"
+    "optimizely",
+    "cli"
   ],
   "author": "Arun Sivashankaran",
-  "contributors" : [
-      "Arun Sivashankaran",
-      "John Henry"
-      ],
+  "contributors": [
+    "Arun Sivashankaran",
+    "John Henry"
+  ],
   "license": "ISC",
   "dependencies": {
     "bluebird": "^2.3.2",
@@ -26,8 +26,8 @@
     "opener": "^1.4.0",
     "restler": "^3.2.2",
     "yargs": "^1.3.1"
-    },
-      "engines": {
-      "node": "^0.10.32"
-    }
+  },
+  "engines": {
+    "node": "^0.10.32"
+  }
 }
