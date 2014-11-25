@@ -1,6 +1,6 @@
 {
   "name": "optin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Command line power tool for Optimizely",
   "main": "index.js",
   "bin": {
