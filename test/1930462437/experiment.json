@@ -1,0 +1,49 @@
+{
+    "primary_goal_id": null,
+    "primary_platform": "web",
+    "platforms": [],
+    "universal_analytics_tracker": "",
+    "id": 1930462437,
+    "audience_ids": [
+        1898570985
+    ],
+    "shareable_results_link": "https://www.optimizely.com/results?token=AAKk7kEAY8Uz4I_LfVtKbmLl5yCqZ_6a&experiment_id=1930462437",
+    "custom_js": "",
+    "display_goal_order_lst": [],
+    "backend_api_host": "nbe-api",
+    "is_multivariate": false,
+    "earliest_original": "2014-09-17T05:31:01.838490Z",
+    "details": "",
+    "share_token": "AAKk7kEAY8Uz4I_LfVtKbmLl5yCqZ_6a",
+    "universal_analytics_slot": 1,
+    "project_id": 1928540725,
+    "variation_ids": [
+        1937451149,
+        1937151887
+    ],
+    "status": "Running",
+    "url_conditions": [
+        {
+            "negate": false,
+            "match_type": "simple",
+            "value": "http://backstage-demo.s3-website-us-east-1.amazonaws.com/marketo-demo.html"
+        }
+    ],
+    "use_variation_weights": true,
+    "description": "Marketer Test",
+    "display_baseline_index": 0,
+    "last_modified": "2014-09-17T05:38:20.435960Z",
+    "earliest": "2014-09-17T05:31:01.838490Z",
+    "pages": "[]",
+    "activation_mode": null,
+    "custom_css": "",
+    "created": "2014-09-17T05:25:28.786230Z",
+    "section_ids": [],
+    "percentage_included": 10000,
+    "experiment_type": "ab",
+    "universal_analytics_enabled": false,
+    "enabled_integration_ids": [],
+    "edit_user_agent": "",
+    "edit_url": "http://backstage-demo.s3-website-us-east-1.amazonaws.com/marketo-demo.html",
+    "latest": null
+}
