@@ -49,13 +49,29 @@ program
 .action(require("../lib/set-project"));
 
 program
+.command("create-experiment <description> <edit_url> [url_conditions]")
+.description("Set Optimizely Token")
+.action(require("../lib/create-experiment"));
+
+
+program
+.command("create-variation <experiment> <description>")
+.description("Set Optimizely Token")
+.action(require("../lib/create-variation"));
+
+program
 .command("show-token")
 .description("Show Optimizely Token")
 .action(require("../lib/show-token"));
 
 program
-.command("list")
-.description("Get Experiments")
+.command("experiments")
+.description("List Experiments")
+.action(require("../lib/list-experiments"));
+
+program
+.command("variations")
+.description("List Variations")
 .action(require("../lib/list-variations"));
 
 program
