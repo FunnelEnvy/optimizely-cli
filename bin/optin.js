@@ -55,7 +55,7 @@ program
 
 
 program
-.command("create-variation <experiment> <description>")
+.command("add-variation <experiment_id> <description>")
 .description("Set Optimizely Token")
 .action(require("../lib/create-variation"));
 
