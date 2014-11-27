@@ -33,36 +33,39 @@ program
 
 program
 .command("set-token [token]")
-.description("Set Optimizely Token")
+.description("Set Optimizely API Token")
 .action(require("../lib/set-token"));
 
 program
-.command("clone [directory]")
-.description("Clone optimizely project")
-.option("-l --local", "initialize project locally")
-.action(require("../lib/clone"));
-
-
-program
 .command("set-project [project_id]")
-.description("Set Optimizely Token")
+.description("Set Optimizely Project Id")
 .action(require("../lib/set-project"));
-
-program
-.command("create-experiment <description> <edit_url> [url_conditions]")
-.description("Set Optimizely Token")
-.action(require("../lib/create-experiment"));
-
-
-program
-.command("add-variation <experiment_id> <description>")
-.description("Set Optimizely Token")
-.action(require("../lib/create-variation"));
 
 program
 .command("show-token")
 .description("Show Optimizely Token")
 .action(require("../lib/show-token"));
+program
+
+.command("clone [directory]")
+.description("Clone optimizely project")
+.option("-l --local", "initialize project locally")
+.action(require("../lib/clone"));
+
+program
+.command("create-experiment <description> <edit_url> [url_conditions]")
+.description("Create an experiment within a project")
+.action(require("../lib/create-experiment"));
+
+program
+.command("add-variation <experiment_id> <description>")
+.description("Add a variation to an experiment.")
+.action(require("../lib/create-variation"));
+
+program
+.command("push-variation <path>")
+.description("Add a variation to an experiment.")
+.action(require("../lib/push-variations"));
 
 program
 .command("experiments")
