@@ -1,0 +1,21 @@
+// ==UserScript==
+// @name         <%- name %>
+// @namespace    <%- namespace %>
+// @version      <%- version %>
+// @description  <%- description %>
+// @author       <%- author %>
+// @match        <%- match %>
+// @grant        <%- grant %>
+<% var inc = "jQuery"; %>
+<% if(jquery = "full"){
+    %>
+// @require       http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js
+<% }else if(jquery === "lite"){ %>
+// @require       http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js
+<% }else{ %>
+    include = "";
+<% } %>
+// ==/UserScript==
+(function(<%- inc %>){
+    <%- code %>
+})(<%- inc %>);

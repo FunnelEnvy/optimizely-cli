@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Optimizely Powertool</title>
+    </head>
+<body>
+    <% experiments.forEach(function(experiment){%>
+        <h2><%- experiment.id %> <%- experiment.description %></h2>
+        <% experiment.variations.forEach(function(variation){%>
+            <a href="/<%- experiment.id  %>/<%- variation.id  %>/script.user.js">install</a>
+        <% }) %>
+    <% }) %>
+</body>
+</html>
