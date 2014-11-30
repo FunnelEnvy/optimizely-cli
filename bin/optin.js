@@ -86,6 +86,11 @@ program
 .action(loadCommand("list-variations"));
 
 program
+.command("server [port]")
+.description("Start Installation Server")
+.action(loadCommand("server"));
+
+program
 .command("")
 .description("")
 .action(function(arg) {
