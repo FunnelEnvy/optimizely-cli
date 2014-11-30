@@ -2,7 +2,7 @@
 1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'link' ]
 2 info using npm@1.4.28
 3 info using node@v0.10.32
-4 verbose linkPkg /Users/john/Funnelenvy/code/optimizely_powertool
+4 verbose linkPkg /Users/john/Funnelenvy/Projects/optin
 5 error Error: EACCES, unlink '/usr/local/lib/node_modules/optin'
 5 error  { [Error: EACCES, unlink '/usr/local/lib/node_modules/optin']
 5 error   errno: 3,
@@ -11,7 +11,7 @@
 6 error Please try running this command again as root/Administrator.
 7 error System Darwin 14.0.0
 8 error command "/usr/local/bin/node" "/usr/local/bin/npm" "link"
-9 error cwd /Users/john/Funnelenvy/code/optimizely_powertool
+9 error cwd /Users/john/Funnelenvy/Projects/optin
 10 error node -v v0.10.32
 11 error npm -v 1.4.28
 12 error path /usr/local/lib/node_modules/optin

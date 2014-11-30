@@ -5,6 +5,14 @@ var fs = require("fs")
 var optinPackage = require(path.join(__dirname, "../", "package.json"));
 var q = require("q");
 /* commands */
+
+var loadCommand = function(cmd){
+    var self = this;
+    return function(){
+        require("../lib/" + cmd)
+        .apply(self, arguments);
+    }
+}
 program
 .version(optinPackage.version)
 .usage(" - " + optinPackage.description)
@@ -24,7 +32,7 @@ program
         project_name = path.resolve(".").toString().split("/");
         project_name = project_name[project_name.length - 1];
     }
-    require("../lib/create-project")(
+    loadCommand("create-project")(
         project_name,
         program.archive,
         program.jquery,
@@ -34,48 +42,48 @@ program
 program
 .command("set-token [token]")
 .description("Set Optimizely API Token")
-.action(require("../lib/set-token"));
+.action(loadCommand("set-token"));
 
 program
 .command("set-project [project_id]")
 .description("Set Optimizely Project Id")
-.action(require("../lib/set-project"));
+.action(loadCommand("set-project"));
 
 program
 .command("show-token")
 .description("Show Optimizely Token")
-.action(require("../lib/show-token"));
+.action(loadCommand("show-token"));
 program
 
 .command("clone [directory]")
 .description("Clone optimizely project")
 .option("-l --local", "initialize project locally")
-.action(require("../lib/clone"));
+.action(loadCommand("clone"));
 
 program
 .command("create-experiment <description> <edit_url> [url_conditions]")
 .description("Create an experiment within a project")
-.action(require("../lib/create-experiment"));
+.action(loadCommand("create-experiment"));
 
 program
 .command("add-variation <experiment_id> <description>")
 .description("Add a variation to an experiment.")
-.action(require("../lib/create-variation"));
+.action(loadCommand("create-variation"));
 
 program
 .command("push-variation <path>")
 .description("Add a variation to an experiment.")
-.action(require("../lib/push-variations"));
+.action(loadCommand("push-variations"));
 
 program
 .command("experiments")
 .description("List Experiments")
-.action(require("../lib/list-experiments"));
+.action(loadCommand("list-experiments"));
 
 program
 .command("variations")
 .description("List Variations")
-.action(require("../lib/list-variations"));
+.action(loadCommand("list-variations"));
 
 program
 .command("")
