@@ -55,7 +55,7 @@ program
 .action(loadCommand("show-token"));
 program
 
-.command("clone")
+.command("clone [directory]")
 .description("Clone optimizely project")
 .option("-l --local", "initialize project locally")
 .action(loadCommand("clone"));

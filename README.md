@@ -33,9 +33,16 @@ nodemon --exec "optcli host <variation_id>" -e css,js,json
 
 ```
 
+## Know Issues
+
+The __optcli clone__ command currently requests a directory. Leave this blank.
+
+
 ## Release History
 
-* 0.1.0 Initial release
+* 0.0.1 Initial release
+* 0.0.2 Clone bug fix
+
 
 ## Copyright and license
 
