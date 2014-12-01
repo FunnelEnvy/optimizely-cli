@@ -4,8 +4,7 @@
   "description": "Command line power tool for Optimizely",
   "main": "index.js",
   "bin": {
-    "optpt": "bin/optpt.js",
-    "optin": "bin/optin.js"
+    "optcli": "bin/optcli.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
