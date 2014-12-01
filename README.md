@@ -1,25 +1,42 @@
-Optimizely Powertool
-=========
+#Optimizely Command Line Interface
 
 A command line application to create Optimizely experiments and publish via the
 API
 
+Please forgive this document's incompleteness. We're still working on it :).
+
 ## Installation
 
-  npm install <GIT_URL> --save
+```
+npm install -g optimizely-cli
+```
+This will install the __optcli__ exectuable on your system.
 
 ## Usage
 
+Again, this is still a work in progress, but you can view the available commands using the --help option
 
-## Tests
+```
+optcli --help
+```
+### Realtime Localhosting
+The following command will set host variations
 
-  npm test
+```sh
+optcli host <variation_id>
+```
 
-## Contributing
+Use [nodemon](https://www.npmjs.org/package/nodemon) to force the server to update as you edit files
 
-In lieu of a formal styleguide, take care to maintain the existing coding style.
-Add unit tests for any new or changed functionality. Lint and test your code.
+```sh
+nodemon --exec "optcli host <variation_id>" -e css,js,json
+
+```
 
 ## Release History
 
 * 0.1.0 Initial release
+
+## Copyright and license
+
+Code copyright 2014 Celeriusgroup Inc. Code released under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0).

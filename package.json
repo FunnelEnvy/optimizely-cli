@@ -1,7 +1,9 @@
 {
-  "name": "optin",
-  "version": "0.0.2",
-  "description": "Command line power tool for Optimizely",
+  "name": "optimizely-cli",
+  "version": "0.0.1",
+  "description": "A command line application to create Optimizely experiments and publish via the
+  API",
+  "private": "false",
   "main": "index.js",
   "bin": {
     "optcli": "bin/optcli.js"
@@ -9,7 +11,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "git@bitbucket.org:funnelenvy/optimizely_powertool.git",
+  "repository": "git@github.org:funnelenvy/optimizely-cli.git",
   "keywords": [
     "optimizely",
     "cli"
@@ -19,7 +21,7 @@
     "Arun Sivashankaran",
     "John Henry"
   ],
-  "license": "ISC",
+  "license": "Apache 2.0",
   "dependencies": {
     "bluebird": "^2.3.2",
     "cli-table": "^0.3.1",
