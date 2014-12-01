@@ -1,9 +1,7 @@
 {
   "name": "optimizely-cli",
   "version": "0.0.1",
-  "description": "A command line application to create Optimizely experiments and publish via the
-  API",
-  "private": "false",
+  "description": "A command line application to create Optimizely experiments and publish via the API",
   "main": "index.js",
   "bin": {
     "optcli": "bin/optcli.js"
@@ -11,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": "git@github.org:funnelenvy/optimizely-cli.git",
+  "repository": "git@github.com:FunnelEnvy/optimizely-cli.git",
   "keywords": [
     "optimizely",
     "cli"
