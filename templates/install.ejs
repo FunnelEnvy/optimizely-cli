@@ -1,0 +1,16 @@
+// ==UserScript==
+// @name         <%- variation_id %>
+// @namespace    <%- experiment_id %>
+// @description  <%- description %>
+// @match        <%- _url %>
+<% if(_jquery === "jQuery"){%>// @require      http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js<% } %>
+// ==/UserScript==
+var scriptElement = document.createElement('script');
+scriptElement.type = 'text/javascript';
+scriptElement.src =  '/localhost:<%- _port %>/variation.js';
+document.head.appendChild(scriptElement);
+
+var stylesheet = document.createElement('link');
+stylesheet.rel = 'stylesheet';
+stylesheet.href = '/localhost:<%- _port %>/variation.css';
+document.head.appendChild(stylesheet);

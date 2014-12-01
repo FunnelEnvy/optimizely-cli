@@ -102,6 +102,11 @@ program
 .action(loadCommand("server"));
 
 program
+.command("host <variation_id> [port]")
+.description("Host")
+.action(loadCommand("host"));
+
+program
 .command("")
 .description("")
 .action(function(arg) {
