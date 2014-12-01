@@ -76,6 +76,17 @@ program
 .action(loadCommand("push-variations"));
 
 program
+.command("open-variation <variation_id>")
+.description("Add a variation to an experiment.")
+.action(loadCommand("open-variation"));
+
+program
+.command("update-variation <variation_id>")
+.description("Add a variation to an experiment.")
+.action(loadCommand("update-variation"));
+
+
+program
 .command("experiments")
 .description("List Experiments")
 .action(loadCommand("list-experiments"));
