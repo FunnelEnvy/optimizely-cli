@@ -1,21 +1,20 @@
 // ==UserScript==
-// @name         <%- name %>
-// @namespace    <%- namespace %>
-// @version      <%- version %>
+// @name         <%- variation_id %>
+// @namespace    <%- experiment_id %>
 // @description  <%- description %>
-// @author       <%- author %>
-// @match        <%- match %>
-// @grant        <%- grant %>
-<% var inc = "jQuery"; %>
-<% if(jquery = "full"){
+// @match        <%- _url %>
+<% var jQuery = "jQuery"; %>
+<% var $ = "$"; %>
+<% if(_jquery === "jQuery"){
     %>
 // @require       http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js
-<% }else if(jquery === "lite"){ %>
+<% }else if(_jquery === "lite"){ %>
 // @require       http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.js
-<% }else{ %>
-    include = "";
-<% } %>
+<% }else{
+    jQuery = "";
+    $ = "";
+} %>
 // ==/UserScript==
-(function(<%- inc %>){
-    <%- code %>
-})(<%- inc %>);
+(function(<%- $ %>){
+    <%- _js %>
+})(<%- jQuery %>);
