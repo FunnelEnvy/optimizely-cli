@@ -42,6 +42,13 @@ program
     .option("-r --remote", "Create experiment remotely as well as locally.")
     .action(loadCommand("create-experiment"));
 
+program
+    .command("variation <experiment> <descriptions>")
+    .description("Create Experiment Host")
+    .option("-r --remote", "Create experiment remotely as well as locally.")
+    .action(loadCommand("create-variation"));
+
+
 /*
 program
 .command("experiment <description> [variation_descriptions...]")
@@ -94,27 +101,6 @@ program
     .action(loadCommand("set-token"));
 
 program
-    .command("set-project [project_id]")
-    .description("Set Optimizely Project Id")
-    .action(loadCommand("set-project"));
-
-program
-    .command("show-token")
-    .description("Show Optimizely Token")
-    .action(loadCommand("show-token"));
-program
-
-    .command("clone [directory]")
-    .description("Clone optimizely project")
-    .option("-l --local", "initialize project locally")
-    .action(loadCommand("clone"));
-
-program
-    .command("add-variation <experiment_id> <description>")
-    .description("Add a variation to an experiment.")
-    .action(loadCommand("create-variation"));
-
-program
     .command("push-variation <path>")
     .description("Add a variation to an experiment.")
     .action(loadCommand("push-variations"));
@@ -124,21 +110,6 @@ program
     .description("Add a variation to an experiment.")
     .action(loadCommand("open-variation"));
 
-program
-    .command("update-variation <variation_id>")
-    .description("Add a variation to an experiment.")
-    .action(loadCommand("update-variation"));
-
-
-program
-    .command("experiments")
-    .description("List Experiments")
-    .action(loadCommand("list-experiments"));
-
-program
-    .command("variations")
-    .description("List Variations")
-    .action(loadCommand("list-variations"));
 
 program
     .command("server [port]")
