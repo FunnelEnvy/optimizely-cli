@@ -22,7 +22,7 @@ program
 
 program
     .command("host <variation_id> [port]")
-    .description("Host")
+    .description("Host Variations")
     .action(loadCommand("host"));
 
 program
@@ -38,14 +38,14 @@ program
 
 program
     .command("experiment <description> <url> [variation_descriptions]")
-    .description("Create Experiment Host")
+    .description("Create Variation")
     .option("-r --remote", "Create experiment remotely as well as locally.")
     .action(loadCommand("create-experiment"));
 
 program
     .command("variation <experiment> <descriptions>")
-    .description("Create Experiment Host")
-    .option("-r --remote", "Create experiment remotely as well as locally.")
+    .description("Create Experiment")
+    .option("-r --remote", "Create variation remotely as well as locally.")
     .action(loadCommand("create-variation"));
 
 /*
