@@ -48,8 +48,19 @@ program
     .option("-r --remote", "Create experiment remotely as well as locally.")
     .action(loadCommand("create-variation"));
 
-
 /*
+program
+    .command("list <experiment> <descriptions>")
+    .description("List all experiments and variations")
+    .option("-r --remote", "Include remote experiments and variations")
+    .action(loadCommand("list"));
+
+program
+    .command("push <experiment>")
+    .description("Synchronize experiments and variations")
+    .action(loadCommand("push"));
+
+
 program
 .command("experiment <description> [variation_descriptions...]")
 .description("Create an experiment")
@@ -91,9 +102,6 @@ program
 .action(loadCommand("init-project"));
 
 
-*/
-
-//
 
 program
     .command("set-token [token]")
@@ -115,6 +123,7 @@ program
     .command("server [port]")
     .description("Start Installation Server")
     .action(loadCommand("server"));
+    */
 
 
 /*
