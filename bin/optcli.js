@@ -20,6 +20,8 @@ program
   .description(optinPackage.description)
   .option("-o --option [value]", "generic option")
 
+
+
 program
   .command("host <variation_id> [port]")
   .description("Host Variations")
@@ -82,7 +84,10 @@ program
     console.log('      #file edits will be visible upon page refresh');
   })
 
-
+program
+  .command("help")
+  .description("Show Help")
+  .action(program.help);
 
 /*
 program
@@ -134,7 +139,7 @@ program
 .action(function(arg) {
     program.help();
 });
-*/
+
 
 program
   .command("*")
@@ -144,6 +149,6 @@ program
     program.help();
   });
 
-
+  */
 
 program.parse(process.argv);
