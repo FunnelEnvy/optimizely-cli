@@ -58,22 +58,28 @@ program
   .command('example')
   .description("Show Examples")
   .action(function() {
+    console.log('');
+    console.log(
+      '  Usage: optcli  - A command line application to create Optimizely experiments and publish via the API'
+    );
+    console.log('');
     console.log('  Examples:');
     console.log('');
     console.log('    Create Experiment Remotely:');
     console.log('');
-    console.log('      optcli init --remote <project_id>');
+    console.log('      optcli init --pull <project_id>');
     console.log('      optcli experiment "exp 1" "www.example.com"');
     console.log('      optcli variation "exp 1" "var 1"');
-    console.log('      #This is where you edit files');
+    console.log('      #edit files');
     console.log('      optcli push "exp 1" "var 1"');
+    console.log('');
     console.log('');
     console.log('    Install and Host Local Experiment Variation:');
     console.log('');
     console.log('      optcli host "exp1" "var 1" 8080');
     console.log('      #visit localhost:8080 to install script');
     console.log('      #visit experiment url');
-    console.log('      #edits will be visible upon refresh');
+    console.log('      #file edits will be visible upon page refresh');
   })
 
 
