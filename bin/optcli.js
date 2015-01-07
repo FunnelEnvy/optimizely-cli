@@ -50,20 +50,26 @@ program
 program
   .command("host <path> [port]")
   .option("-s --ssl", "SSL")
+  .option("-k --key [path]", "path to key file (for SSL)")
+  .option("-c --crt [path]", "path to certificate file (for SSL)")
   .description("Host variation locally")
   .action(loadCommand("host"));
 
 program
-  .command("push <experiment> [variation...]")
-  .description("Create Experiment")
-  .option("-r --remote", "Create variation remotely as well as locally.")
-  .action(loadCommand("push"));
+  .command("push-experiment <path>")
+  .description("Push an experiment to Optimizely")
+  .action(loadCommand("push-experiment"));
 
 program
-  .command("pull <object>")
-  .description("Create Experiment")
-  .option("-r --remote", "Create variation remotely as well as locally.")
-  .action(loadCommand("push"));
+  .command("push-variation <path>")
+  .description("Push a variation to Optimizely (experiment must be pushed first)")
+  .action(loadCommand("push-variation"));
+
+// program
+//   .command("pull <object>")
+//   .description("Create Experiment")
+//   .option("-r --remote", "Create variation remotely as well as locally.")
+//   .action(loadCommand("push"));
 
 program
    .command('*')
