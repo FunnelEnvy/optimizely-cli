@@ -4,51 +4,54 @@ var program = require("commander");
 var path = require("path");
 var fs = require("fs")
 var optinPackage = require(path.join(__dirname, "../", "package.json"));
-var q = require("q");
-/* commands */
+var logger = require("../lib/logger.js");
 
+/* commands */
 var loadCommand = function(cmd) {
   var self = this;
   return function() {
-    require("../lib/" + cmd)
+    require("../lib/commands/" + cmd)
       .apply(self, arguments);
   }
 }
+
+function required(val, option) {
+  if (val.length === 0) {
+    logger.log("error", option + " is required, exiting");
+    process.exit(1);
+  }
+}
+
+//default log level
+//TODO: parameterize this
+logger.debugLevel = 'debug';
+
 program
   .version(optinPackage.version)
   .usage(" - " + optinPackage.description)
   .description(optinPackage.description)
   .option("-o --option [value]", "generic option")
 
-
-
 program
-  .command("host <variation_id> [port]")
-  .description("Host Variations")
-  .action(loadCommand("host"));
-
-program
-  .command("init [project_description]")
+  .command("init [project_id]")
   .description("Initialize an optimizely project.")
-  .option("-r --remote", "Initialize project remotely as well as locally.")
-  .option("-p --pull", "Pull project by initializing")
-  .option("-j --jquery", "Include jQuery (new project)")
-  .option("-a --archive", "Archive (new project)")
-  .option("-e --experiments", "Download experiments.")
-  .option("-v --variations", "Download variations. (Implies --experiments)")
   .action(loadCommand("init-project"));
 
 program
-  .command("experiment <description> <url> [variation_descriptions]")
-  .description("Create Variation")
-  .option("-r --remote", "Create experiment remotely as well as locally.")
+  .command("experiment <folder> <description> <url>")
+  .description("Create Local Experiment")
   .action(loadCommand("create-experiment"));
 
 program
-  .command("variation <experiment> <descriptions>")
-  .description("Create Experiment")
-  .option("-r --remote", "Create variation remotely as well as locally.")
+  .command("variation <experiment> <folder> <description>")
+  .description("Create Local Variation")
   .action(loadCommand("create-variation"));
+
+program
+  .command("host <path> [port]")
+  .option("-s --ssl", "SSL")
+  .description("Host variation locally")
+  .action(loadCommand("host"));
 
 program
   .command("push <experiment> [variation...]")
@@ -57,98 +60,15 @@ program
   .action(loadCommand("push"));
 
 program
-  .command('example')
-  .description("Show Examples")
-  .action(function() {
-    console.log('');
-    console.log(
-      '  Usage: optcli  - A command line application to create Optimizely experiments and publish via the API'
-    );
-    console.log('');
-    console.log('  Examples:');
-    console.log('');
-    console.log('    Create Experiment Remotely:');
-    console.log('');
-    console.log('      optcli init --pull <project_id>');
-    console.log('      optcli experiment "exp 1" "www.example.com"');
-    console.log('      optcli variation "exp 1" "var 1"');
-    console.log('      #edit files');
-    console.log('      optcli push "exp 1" "var 1"');
-    console.log('');
-    console.log('');
-    console.log('    Install and Host Local Experiment Variation:');
-    console.log('');
-    console.log('      optcli host "exp1" "var 1" 8080');
-    console.log('      #visit localhost:8080 to install script');
-    console.log('      #visit experiment url');
-    console.log('      #file edits will be visible upon page refresh');
-  })
+  .command("pull <object>")
+  .description("Create Experiment")
+  .option("-r --remote", "Create variation remotely as well as locally.")
+  .action(loadCommand("push"));
 
 program
-  .command("help")
-  .description("Show Help")
-  .action(program.help);
-
-/*
-program
-    .command("list <experiment> <descriptions>")
-    .description("List all experiments and variations")
-    .option("-r --remote", "Include remote experiments and variations")
-    .action(loadCommand("list"));
-
-program
-  .command("list")
-  .description("List experiments and variations")
-  .option("-r --remote", "List remote projects as well as local experiments.")
-  .action(loadCommand("init-project"));
-
-program
-  .command("status")
-  .description("Show project status")
-  .option("-r --remote", "Also show remote project status.")
-  .action(loadCommand("init-project"));
-
-program
-  .command("asset <path> [name]")
-  .description("Sync objects")
-  .option("-u --upstream", "Sync upstream")
-  .option("-d --downstream", "Sync downstream")
-  .action(loadCommand("init-project"));
-
-program
-    .command("set-token [token]")
-    .description("Set Optimizely API Token")
-    .action(loadCommand("set-token"));
-
-program
-    .command("open-variation <variation_id>")
-    .description("Add a variation to an experiment.")
-    .action(loadCommand("open-variation"));
-
-program
-    .command("server [port]")
-    .description("Start Installation Server")
-    .action(loadCommand("server"));
-    */
-
-
-/*
-program
-.command("")
-.description("")
-.action(function(arg) {
-    program.help();
-});
-
-
-program
-  .command("*")
-  .description("")
-  .action(function(arg) {
-    console.log("invalid command: '%s'", arg);
-    program.help();
-  });
-
-  */
+   .command('*')
+   .action(function(env) {
+     console.log('sorry, I don\'t know how to do that');
+   });
 
 program.parse(process.argv);
