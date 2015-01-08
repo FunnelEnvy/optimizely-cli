@@ -23,18 +23,23 @@ function required(val, option) {
 }
 
 //default log level
-//TODO: parameterize this
-logger.debugLevel = 'debug';
+logger.debugLevel = 'info';
+
+function increaseVerbosity(v) {
+  logger.debugLevel = 'debug';
+}
 
 program
   .version(optinPackage.version)
   .usage(" - " + optinPackage.description)
   .description(optinPackage.description)
-  .option("-o --option [value]", "generic option")
+  .option("-v --verbose", "show debug output", increaseVerbosity)
 
 program
   .command("init [project_id]")
   .description("Initialize an optimizely project.")
+  .option("-r --remote", "initialize from remote project")
+  .option("-j --jquery", "include jquery (local project only)")
   .action(loadCommand("init-project"));
 
 program
