@@ -50,8 +50,6 @@ program
 program
   .command("host <path> [port]")
   .option("-s --ssl", "SSL")
-  .option("-k --key [path]", "path to key file (for SSL)")
-  .option("-c --crt [path]", "path to certificate file (for SSL)")
   .description("Host variation locally")
   .action(loadCommand("host"));
 
@@ -71,10 +69,10 @@ program
 //   .option("-r --remote", "Create variation remotely as well as locally.")
 //   .action(loadCommand("push"));
 
-program
-   .command('*')
-   .action(function(env) {
-     console.log('sorry, I don\'t know how to do that');
-   });
+// program
+//    .command('*')
+//    .action(function(env) {
+//      console.log('sorry, I don\'t know how to do that');
+//    });
 
 program.parse(process.argv);
