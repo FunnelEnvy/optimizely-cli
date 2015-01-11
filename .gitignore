@@ -9,4 +9,3 @@ node_modules/
 .npmrc
 
 .optin/
-test/
