@@ -1,4 +1,4 @@
-//Test the create experiment command
+//Test the experiment command
 var fs = require('fs');
 
 var assert = require('chai').assert;
@@ -10,34 +10,51 @@ var options = {
 var directory = {};
 
 describe('Create Experiment Module', function () {
-  before(function () {
+  before(function (done) {
+    //Create temporary project directory and enter it
     quickTemp.makeOrRemake(directory, 'project');
     options.cwd = directory.project;
+    //Initialize the project 
     nexpect.spawn('optcli', ['init'], options)
       .run(function (err) {
         assert(!err, 'Error when initializing a project');
+        //Create the test experiment
+        nexpect.spawn('optcli', ['experiment', 'test-experiment', '"Test Experiment"', 'http://example.com'], options)
+          .run(function (err) {
+            assert(!err, 'Errror when creating experiment');
+            directory.experiment = directory.project + '/test-experiment/';
+            done();
+          });
       });
   });
   after(function () {
+    //Remove the temporary directory
     quickTemp.remove(directory, 'project');
   })
-  it('Should create an experiment folder with experiment.json, global.js, and global.css' , function (done) {
-    nexpect.spawn('optcli', ['experiment', 'test-experiment', '"Test Experiment"', 'http://example.com'], options)
-      .run(function (err) {
-        assert(!err, 'Errror when creating experiment');
-        directory.experiment = directory.project + '/test-experiment/';
-        fs.exists(directory.experiment + 'experiment.json', function (exists) {
-          assert(exists, 'experiment.json not found');
-          fs.exists(directory.experiment + 'global.js', function (exists) {
-            assert(exists, 'global.js not found');
-            fs.exists(directory.experiment + 'global.css', function (exists) {
-              assert(exists, 'global.css not found');
-              done();
-            });
-          });
-        });
-      });
+  it('Should create a folder called test-experiment', function (done) {
+    fs.exists(directory.experiment, function (exists) {
+      assert(exists, 'experiment folder not found');
+      done();
+    })
   });
+  it('Should create experiment.json in the experiment folder', function (done) {
+    fs.exists(directory.experiment + 'experiment.json', function (exists) {
+      assert(exists, 'experiment.json not found');
+      done();
+    });
+  });
+  it('Should create global.js in the experiment folder', function (done) {
+    fs.exists(directory.experiment + 'global.js', function (exists) {
+      assert(exists, 'global.js not found');
+      done();
+    });
+  });
+  it('Should create global.css in the experiment folder', function (done) {
+    fs.exists(directory.experiment + 'global.css', function (exists) {
+      assert(exists, 'global.css not found');
+      done();
+    });
+  })
 })
 
 
