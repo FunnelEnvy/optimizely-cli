@@ -32,7 +32,6 @@ describe('Create Variation Module', function () {
         assert(!err, 'Error when creating variation');
         directory.variation = directory.project + '/test-experiment/test-variation';
         fs.exists(directory.variation + '/variation.json', function (exists) {
-          console.log(directory.variation);
           assert(exists, 'variation.json not found');
           fs.exists(directory.variation + '/variation.js', function (exists) {
             assert(exists, 'variation.js not found');
