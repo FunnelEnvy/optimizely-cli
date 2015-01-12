@@ -4,6 +4,9 @@ var fs = require('fs');
 var assert = require('chai').assert;
 var nexpect = require('nexpect');
 var quickTemp = require('quick-temp');
+
+var utils = require('../utils');
+
 var options = {
 	'cwd': __dirname
 };
@@ -14,18 +17,10 @@ describe('Create Experiment Module', function () {
     //Create temporary project directory and enter it
     quickTemp.makeOrRemake(directory, 'project');
     options.cwd = directory.project;
-    //Initialize the project 
-    nexpect.spawn('optcli', ['init'], options)
-      .run(function (err) {
-        assert(!err, 'Error when initializing a project');
-        //Create the test experiment
-        nexpect.spawn('optcli', ['experiment', 'test-experiment', '"Test Experiment"', 'http://example.com'], options)
-          .run(function (err) {
-            assert(!err, 'Errror when creating experiment');
-            directory.experiment = directory.project + '/test-experiment/';
-            done();
-          });
-      });
+    directory.experiment = directory.project + '/test-experiment/';
+
+    //Initialize the project and create experiment
+    utils.init(options, utils.experiment, [options, done]);
   });
   after(function () {
     //Remove the temporary directory

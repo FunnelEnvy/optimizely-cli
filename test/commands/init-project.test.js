@@ -5,6 +5,8 @@ var assert = require('chai').assert;
 var nexpect = require('nexpect');
 var quickTemp = require('quick-temp');
 
+var utils = require('../utils');
+
 var options = {
   'cwd': __dirname
 };
@@ -16,11 +18,7 @@ describe('Init Project Module' , function () {
     quickTemp.makeOrRemake(directory, 'project');
     options.cwd = directory.project;
     //Initialize the project
-    nexpect.spawn('optcli', ['init'], options)
-      .run(function (err) {
-        assert(!err, 'Error when running init command: ' + err);
-        done();
-      });
+    utils.init(options, done, []);
   });
   after(function (done) {
     quickTemp.remove(directory, 'project');
