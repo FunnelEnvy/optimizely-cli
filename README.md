@@ -55,7 +55,7 @@ optcli push-variation <path>
 ```
 Push a local variation to Optimizely
 
-## Know Issues
+## Known Issues
 * Tests - Yeah, we need them. In progress.
 
 
