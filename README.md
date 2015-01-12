@@ -61,11 +61,16 @@ Push a local variation to Optimizely
 
 ## Release History
 
+* 0.12.0 Bugfixes, more compliant with semver
 * 0.0.11 Separated create from push operations
 * 0.0.10 Refactored and cleanup
 * 0.0.7 Push
 * 0.0.2 Clone bug fix
 * 0.0.1 Initial release
+
+## Contributing
+
+Please see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Copyright and license
 
