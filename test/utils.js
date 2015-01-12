@@ -4,7 +4,9 @@
 var nexpect = require('nexpect');
 var assert = require('chai').assert;
 
+var optcli = __dirname + "/../bin/optcli.js";
 var utils = {};
+
 
 /** 
  * Initializes a project within the cwd 
@@ -12,7 +14,7 @@ var utils = {};
  */
  utils.init = function (options, done, args) {
   args = args || [];
-  nexpect.spawn('optcli', ['init'], options)
+  nexpect.spawn(optcli, ['init'], options)
     .run(function (err) {
       assert(!err, 'Error while initializing a project');
       done.apply(this, args)
@@ -25,7 +27,7 @@ var utils = {};
  */
 utils.experiment = function (options, done, args) {
   args = args || [];
-  nexpect.spawn('optcli', ['experiment', 'test-experiment', '"Test Experiment"', 'http://example.com'], options)
+  nexpect.spawn(optcli, ['experiment', 'test-experiment', '"Test Experiment"', 'http://example.com'], options)
     .run(function (err) {
       assert(!err, 'Error while creating experiment');
       done.apply(this, args);
@@ -38,7 +40,7 @@ utils.experiment = function (options, done, args) {
  */
 utils.variation = function (options, done, args) {
   args = args || [];
-  nexpect.spawn('optcli', ['variation', 'test-experiment', 'test-variation', '"Test Variation"'], options)
+  nexpect.spawn(optcli, ['variation', 'test-experiment', 'test-variation', '"Test Variation"'], options)
     .run(function (err) {
       assert(!err, 'Error when creating variation');
       done.apply(this, args);
