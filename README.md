@@ -70,7 +70,7 @@ Push a local variation to Optimizely
 
 ## Contributing
 
-Please see [CONTRIBUTING.md](CONTRIBUTING.md).
+Please see [CONTRIBUTING.md](contributing.md).
 
 ## Copyright and license
 
