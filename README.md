@@ -1,77 +1,72 @@
 #Optimizely Command Line Interface
 
-Optimizely-CLI (optcli) is a command line tool that lets developers build experiments faster by using the sofware tools you already love and publish to Optimizely when ready. We build a lot of tests at [FunnelEnvy](http://www.funnelenvy.com) and found that (being stubborn engineers) we were more comfortable using our source editors and Git to develop locally - and this had a *significant* positive impact on our test velocity. Optimizely-cli is a command line executable that also integrates with the [Tampermonkey Chrome extension](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en) for local preview and the Optimizely API for retrieving our publishing tests.
+Optimizely-CLI (optcli) is a command line tool that lets developers build experiments faster by using the sofware tools you already love and publish to Optimizely when ready. We build a lot of tests at [FunnelEnvy](http://www.funnelenvy.com) and found that (being stubborn engineers) we were more comfortable using our source editors and Git to develop locally - and this had a *significant* positive impact on our test velocity. 
 
-Brief intro below - for more usage details our [Optimizely-CLI page](http://www.funnelenvy.com/optimizely-cli).
+Optimizely-cli includes a command line executable that also integrates with either the[Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en) (Google Chrome) or [Greasemonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) (Firefox) extensions for local development / preview and the Optimizely API for publishing tests.
+
+Brief intro below - for more usage details our [Optimizely-CLI page](http://www.funnelenvy.com/optimizely-cli/).
 
 ## Installation
 
 ```
 npm install -g optimizely-cli
 ```
-This will install the __optcli__ exectuable on your system.
+This will install the __optcli__ executable on your system.
 
 ### Dependencies
 
 
-You'll need to have node.js & npm installed locally to run `optcli` and the Google Chrome Browser with the TamperMonkey extension to preview local variations.
+You'll need to have [node.js](http://nodejs.org/) installed locally to run `optcli` and either the Tampermonkey or Greasemonkey extensions to view variations locally.
 
 ## Quickstart
-
-Again, this is still a work in progress, but you can view the available commands using the help command
 
 ```
 optcli help
 ```
-
 View available commands
 
 ```
-optcli example
-```
-
-View example commands
-
-
-```
-optcli init [project description]
+optcli init [options] [project_id]
 ```
 Initializes a new Optimizely project locally (use `-r` for remote).
 
-
-
-
-### Realtime Localhosting
-The following command will set host variations
+```
+optcli experiment <experiment> <folder> <description>
+```
+Create a local experiment
 
 ```
-optcli experiment [options] <description> <url>
+optcli variation <experiment> <folder> <description>
 ```
-Creates a new experiment (use `-r` for remote).
+Create a local variation
 
 ```
-optcli variation [options] <experiment> <description>
+optcli host [options] <path> [port]
 ```
-Creates a new variation in an experiment (use `-r` for remote).
-
-## Know Issues
-
-Pushing a variation for the first time i.e.
+Host a variation locally. Point your browser at http(s)://localhost:8080 (default port) for usage info.
 
 ```
-optcli push "experiment" "variation"
+optcli push-experiment <path>
 ```
+Push a local experiment to Optimizely.
 
-Results in an error upon fist push. Subsequent tries are successful.
+```
+optcli push-variation <path>
+```
+Push a local variation to Optimizely
+
+## Known Issues
+* Tests - Yeah, we need them. In progress.
 
 
 ## Release History
 
-* 0.0.1 Initial release
-* 0.0.2 Clone bug fix
+* 0.0.11 Separated create from push operations
+* 0.0.10 Refactored and cleanup
 * 0.0.7 Push
-
+* 0.0.2 Clone bug fix
+* 0.0.1 Initial release
 
 ## Copyright and license
 
-Code copyright 2014 Celerius Group Inc. Code released under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0).
+Code copyright 2015 Celerius Group Inc. Released under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0).
