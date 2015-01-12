@@ -11,12 +11,12 @@ Brief intro below - for more usage details our [Optimizely-CLI page](http://www.
 ```
 npm install -g optimizely-cli
 ```
-This will install the __optcli__ exectuable on your system.
+This will install the __optcli__ executable on your system.
 
 ### Dependencies
 
 
-You'll need to have node.js & npm installed locally to run `optcli` and either the Tampermonkey or Greasemonkey extensions to view variations locally.
+You'll need to have [node.js](http://nodejs.org/) installed locally to run `optcli` and either the Tampermonkey or Greasemonkey extensions to view variations locally.
 
 ## Quickstart
 
