@@ -4,6 +4,8 @@ var fs = require('fs');
 var assert = require('chai').assert;
 var nexpect = require('nexpect');
 var quickTemp = require('quick-temp');
+
+var utils = require('../utils.js');
 var options = {
   'cwd': __dirname
 };
@@ -11,26 +13,14 @@ var directory = {};
 
 describe('Create Variation Module', function () {
   before(function (done) {
+
     //Create temporary project directory
     quickTemp.makeOrRemake(directory, 'project');
     options.cwd = directory.project;
-    //Initialize a project within the project directory
-    nexpect.spawn('optcli', ['init'], options)
-      .run(function (err) {
-        assert(!err, 'Error while initializing a project: ' + err);
-        //Create an experiment within the project directory
-        nexpect.spawn('optcli', ['experiment', 'test-experiment', '"Test Experiment"', 'http://example.com'], options)
-          .run(function (err) {
-            assert(!err, 'Error while creating experiment: ' + err);
-            //Create the test variation within the project directory
-            nexpect.spawn('optcli', ['variation', 'test-experiment', 'test-variation', '"Test Variation"'], options)
-              .run(function (err) {
-                assert(!err, 'Error when creating variation');
-                directory.variation = directory.project + '/test-experiment/test-variation';
-                done();
-              });
-          });
-      });
+    directory.variation = directory.project + '/test-experiment/test-variation';
+    
+    //Initialize a project, create experiment, and create a variation
+    utils.init(options, utils.experiment, [options, utils.variation, [options,done]]);
   });
   after(function () {
     //Remove the project directory
