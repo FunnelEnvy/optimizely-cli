@@ -2,8 +2,7 @@
 
 var program = require("commander");
 var path = require("path");
-var fs = require("fs")
-var optinPackage = require(path.join(__dirname, "../", "package.json"));
+var optcliPackage = require(path.join(__dirname, "../", "package.json"));
 var logger = require("../lib/logger.js");
 
 /* commands */
@@ -15,13 +14,6 @@ var loadCommand = function(cmd) {
   }
 }
 
-function required(val, option) {
-  if (val.length === 0) {
-    logger.log("error", option + " is required, exiting");
-    process.exit(1);
-  }
-}
-
 //default log level
 logger.debugLevel = 'info';
 
@@ -30,9 +22,9 @@ function increaseVerbosity(v) {
 }
 
 program
-  .version(optinPackage.version)
-  .usage(" - " + optinPackage.description)
-  .description(optinPackage.description)
+  .version(optcliPackage.version)
+  .usage(" - " + optcliPackage.description)
+  .description(optcliPackage.description)
   .option("-v --verbose", "show debug output", increaseVerbosity)
 
 program
@@ -67,17 +59,5 @@ program
   .command("push-variation <path>")
   .description("Push a variation to Optimizely (experiment must be pushed first)")
   .action(loadCommand("push-variation"));
-
-// program
-//   .command("pull <object>")
-//   .description("Create Experiment")
-//   .option("-r --remote", "Create variation remotely as well as locally.")
-//   .action(loadCommand("push"));
-
-// program
-//    .command('*')
-//    .action(function(env) {
-//      console.log('sorry, I don\'t know how to do that');
-//    });
 
 program.parse(process.argv);
