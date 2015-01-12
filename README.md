@@ -4,7 +4,7 @@ Optimizely-CLI (optcli) is a command line tool that lets developers build experi
 
 Optimizely-cli includes a command line executable that also integrates with either the[Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en) (Google Chrome) or [Greasemonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) (Firefox) extensions for local development / preview and the Optimizely API for publishing tests.
 
-Brief intro below - for more usage details our [Optimizely-CLI page](http://www.funnelenvy.com/optimizely-cli/).
+Brief intro below - for more usage details check out our [Optimizely-CLI page](http://www.funnelenvy.com/optimizely-cli/).
 
 ## Installation
 
