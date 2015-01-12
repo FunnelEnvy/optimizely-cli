@@ -23,9 +23,7 @@ You'll need to have [node.js](http://nodejs.org/) installed locally to run `optc
 ```
 optcli help
 ```
-
 View available commands
-
 
 ```
 optcli init [options] [project_id]
@@ -48,12 +46,12 @@ optcli host [options] <path> [port]
 Host a variation locally. Point your browser at http(s)://localhost:8080 (default port) for usage info.
 
 ```
-
+optcli push-experiment <path>
 ```
 Push a local experiment to Optimizely.
 
 ```
-optcli push-experiment <path>
+optcli push-variation <path>
 ```
 Push a local variation to Optimizely
 
