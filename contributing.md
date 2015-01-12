@@ -30,5 +30,3 @@ Some things that will increase the chance that your pull request is accepted:
 
 [style]: https://github.com/RisingStack/node-style-guide
 [commit]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
-
-
