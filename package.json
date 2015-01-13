@@ -7,7 +7,7 @@
     "optcli": "bin/optcli.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test"
   },
   "repository": "git@github.com:FunnelEnvy/optimizely-cli.git",
   "keywords": [
@@ -37,5 +37,11 @@
   },
   "engines": {
     "node": "^0.10.32"
+  },
+  "devDependencies": {
+    "chai": "^1.10.0",
+    "mocha": "^2.1.0",
+    "nexpect": "^0.4.2",
+    "quick-temp": "^0.1.2"
   }
 }
