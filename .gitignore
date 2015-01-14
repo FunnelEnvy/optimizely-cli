@@ -8,5 +8,4 @@
 node_modules/
 .npmrc
 
-.optin/
 tmp/
