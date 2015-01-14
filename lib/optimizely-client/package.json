@@ -1,0 +1,30 @@
+{
+  "name": "optimizely-client",
+  "version": "0.0.0",
+  "description": "Optimizely Client for Node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "optimizely",
+    "rest",
+    "api",
+    "client"
+  ],
+  "author": {
+    "name": "John Henry",
+    "email": "john@iamjohnhenry.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/funnelenvy/optimizely-client.git"
+  },
+  "homepage": "https://github.com/funnelenvy/optimizely-client",
+  "dependencies": {
+    "bluebird": "^2.3.2",
+    "lodash": "^2.4.1",
+    "restler": "^3.2.2"
+  }
+}
