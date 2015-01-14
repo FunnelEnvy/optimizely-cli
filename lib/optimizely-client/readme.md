@@ -12,7 +12,7 @@ $ npm install optimizely-client
 
 ```js
 var OptimizelyClient = require('optimizely-client');
-var apiToken = "*";//Get token from www.optimizely.com/tokens
+var API_TOKEN = "*";//Get token from www.optimizely.com/tokens
 var oc = new OptimizelyClient(API_TOKEN);
 ```
 
