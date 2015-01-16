@@ -1,6 +1,6 @@
 {
   "name": "optimizely-client",
-  "version": "0.0.0",
+  "version": "0.13.0",
   "description": "Optimizely Client for Node",
   "main": "index.js",
   "scripts": {
