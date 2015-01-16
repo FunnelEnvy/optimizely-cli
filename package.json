@@ -30,6 +30,7 @@
     "hat": "0.0.3",
     "lodash": "^2.4.1",
     "opener": "^1.4.0",
+    "optimizely-node-client": "^0.1.0",
     "promptly": "^0.2.0",
     "q": "^1.1.2",
     "restler": "^3.2.2",
