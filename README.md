@@ -60,7 +60,8 @@ Push a local variation to Optimizely
 
 
 ## Release History
-
+* 0.14.1 Bugfixes
+* 0.14.0 Move node client into [separate module](https://github.com/FunnelEnvy/optimizely-node)
 * 0.12.0 Bugfixes, more compliant with semver
 * 0.0.11 Separated create from push operations
 * 0.0.10 Refactored and cleanup
