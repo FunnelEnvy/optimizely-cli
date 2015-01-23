@@ -1,6 +1,6 @@
 #Optimizely Command Line Interface
 
-Optimizely-CLI (optcli) is a command line tool that lets developers build experiments faster by using the sofware tools you already love and publish to Optimizely when ready. We build a lot of tests at [FunnelEnvy](http://www.funnelenvy.com) and found that (being stubborn engineers) we were more comfortable using our source editors and Git to develop locally - and this had a *significant* positive impact on our test velocity. 
+Optimizely-CLI (optcli) is a command line tool that lets developers build experiments faster by using the sofware tools you already love and publish to Optimizely when ready. We build a lot of tests at [FunnelEnvy](http://www.funnelenvy.com) and found that (being stubborn engineers) we were more comfortable using our source editors and Git to develop locally - and this had a *significant* positive impact on our test velocity.
 
 Optimizely-cli includes a command line executable that also integrates with either the[Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en) (Google Chrome) or [Greasemonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) (Firefox) extensions for local development / preview and the Optimizely API for publishing tests.
 
@@ -21,8 +21,9 @@ You'll need to have [node.js](http://nodejs.org/) installed locally to run `optc
 ## Quickstart
 
 ```
-optcli help
+optcli
 ```
+
 View available commands
 
 ```

@@ -57,7 +57,15 @@ program
 
 program
   .command("push-variation <path>")
-  .description("Push a variation to Optimizely (experiment must be pushed first)")
+  .description(
+    "Push a variation to Optimizely (experiment must be pushed first)")
   .action(loadCommand("push-variation"));
+
+//Show help if no arguments are passed
+if (!process.argv.slice(2).length) {
+  program._name = process.argv[1];
+  program._name = program._name.substr(program._name.lastIndexOf("/") + 1);
+  program.outputHelp();
+}
 
 program.parse(process.argv);
