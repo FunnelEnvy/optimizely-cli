@@ -61,6 +61,7 @@ Push a local variation to Optimizely
 
 
 ## Release History
+* 0.14.3 Added push-experiment, push-variation tests
 * 0.14.2 Show help when no argumentss passed
 * 0.14.1 Bugfixes
 * 0.14.0 Move node client into [separate module](https://github.com/FunnelEnvy/optimizely-node)
