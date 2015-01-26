@@ -3,6 +3,8 @@
  */
 var nexpect = require('nexpect');
 var assert = require('chai').assert;
+var fs = require('fs');
+var Promise = require('bluebird');
 
 var optcli = __dirname + "/../bin/optcli.js";
 var utils = {};
@@ -14,7 +16,7 @@ var utils = {};
  */
 utils.init = function(options, done, args) {
   args = args || [];
-  nexpect.spawn(optcli, ['init'], options)
+  nexpect.spawn(optcli, ['init', 'projectId'], options)
     .run(function(err) {
       assert(!err, 'Error while initializing a project');
       done.apply(this, args)
@@ -51,34 +53,31 @@ utils.variation = function(options, done, args) {
     });
 }
 
-
-
 /**
- * Pushes an experiment within the cwd
- * specified in the options object
+ * Creates .optcli directory and token file
  */
-utils.pushExperiment = function(options, done, args) {
-  args = args || [];
-  nexpect.spawn(optcli, ['push-experiment', 'test-experiment'], options)
-    .expect("")
-    .run(function(err) {
-      assert(!err, 'Error while pushing experiment');
-      done.apply(this, args);
-    });
+utils.createOptimizelyToken = function(projectDir) {
+  //create the .optcli and token directory 
+  fs.mkdirSync(projectDir + '/.optcli/');
+  fs.writeFile(projectDir + '/.optcli/token', '12345');
 }
 
 /**
- * Creates a variation within the cwd
- * specified in the options object
- */
-utils.pushVariation = function(options, done, args) {
-  args = args || [];
-  nexpect.spawn(optcli, ['push-variation', 'test-experiment/test-variation'],
-      options)
-    .run(function(err) {
-      assert(!err, 'Error when pushing variation');
-      done.apply(this, args);
-    });
+ * adds an id attribute to a JSON file
+ * */
+utils.addIdToFile = function(fileName, id) {
+  var fileAttrs = JSON.parse(fs.readFileSync(fileName));
+  fileAttrs['id'] = id;
+  return fs.writeFileSync(fileName, JSON.stringify(fileAttrs));
 }
+
+utils.clientFunctionStub = function(id) {
+  return function(args) {
+    return new Promise(function(resolve, reject) {
+      args['id'] = id;
+      resolve(args);
+    })
+  }
+};
 
 module.exports = utils;
