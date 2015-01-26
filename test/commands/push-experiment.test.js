@@ -11,7 +11,7 @@ var utils = require('../utils');
 var logger = require("../../lib/logger.js");
 
 //verbose logging
-// chai.config.includeStack = true;
+// chai.config.includeStack = true;  
 // logger.debugLevel = 'debug';
 
 var ClientStub = function() {};
@@ -32,6 +32,7 @@ describe('Push Experiment Module', function() {
     //Initialize the project and create experiment
     utils.init(options, utils.experiment, [options, done]);
     utils.createOptimizelyToken(directory.project);
+    process.chdir(directory.project);
   });
 
 

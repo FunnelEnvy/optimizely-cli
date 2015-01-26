@@ -33,6 +33,7 @@ describe('Push Experiment Module', function() {
     //Initialize the project and create experiment
     utils.init(options, utils.experiment, [options, utils.variation, [options,done]]);
     utils.createOptimizelyToken(directory.project);
+    process.chdir(directory.project);
   });
 
   after(function() {
