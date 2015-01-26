@@ -1,6 +1,6 @@
 {
   "name": "optimizely-cli",
-  "version": "0.14.2",
+  "version": "0.14.3",
   "description": "A command line application to create Optimizely experiments and publish via the API",
   "main": "index.js",
   "bin": {
