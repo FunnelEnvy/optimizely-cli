@@ -52,6 +52,7 @@ program
 
 program
   .command("push-experiment <path>")
+  .option("-i --iterate", "Push experiment iterate through all variations")
   .description("Push an experiment to Optimizely")
   .action(loadCommand("push-experiment"));
 
