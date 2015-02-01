@@ -44,13 +44,33 @@ utils.experiment = function(options, done, args) {
  */
 utils.variation = function(options, done, args) {
   args = args || [];
-  nexpect.spawn(optcli, ['variation', 'test-experiment', 'test-variation',
-      '"Test Variation"'
-    ], options)
-    .run(function(err) {
-      assert(!err, 'Error when creating variation');
-      done.apply(this, args);
-    });
+
+  if(options.multipleVariations){
+
+    nexpect.spawn(optcli, ['variation', 'test-experiment', 'test-variation-a',
+        '"Test Variation A"'
+      ], options)
+      .run(function(err) {
+        assert(!err, 'Error when creating first variation ' + err);
+        nexpect.spawn(optcli, ['variation', 'test-experiment', 'test-variation-b',
+          '"Test Variation B"'
+        ], options)
+        .run(function(err) {
+          assert(!err, 'Error when creating second variation ' + err);
+          done.apply(this, args);
+        });
+      });
+    
+  } else {
+    nexpect.spawn(optcli, ['variation', 'test-experiment', 'test-variation',
+        '"Test Variation"'
+      ], options)
+      .run(function(err) {
+        assert(!err, 'Error when creating variation ' + err);
+        done.apply(this, args);
+      });
+  }
+  
 }
 
 /**
@@ -59,7 +79,7 @@ utils.variation = function(options, done, args) {
 utils.createOptimizelyToken = function(projectDir) {
   //create the .optcli and token directory 
   fs.mkdirSync(projectDir + '/.optcli/');
-  fs.writeFile(projectDir + '/.optcli/token', '12345');
+  fs.writeFileSync(projectDir + '/.optcli/token', '12345');
 }
 
 /**

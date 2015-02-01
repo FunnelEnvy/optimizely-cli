@@ -15,12 +15,16 @@ var logger = require("../../lib/logger.js");
 // logger.debugLevel = 'debug';
 
 var ClientStub = function() {};
+var VariationClientStub = sinon.spy();
 var options = {
   'cwd': __dirname
 };
 var directory = {};
 
-var pushExperiment = proxyquire('../../lib/commands/push-experiment', { 'optimizely-node-client': ClientStub });
+var pushExperiment = proxyquire('../../lib/commands/push-experiment', { 
+  'optimizely-node-client': ClientStub,
+  './push-variation': VariationClientStub
+ });
 
 describe('Push Experiment Module', function() {
   before(function(done) {
@@ -38,14 +42,14 @@ describe('Push Experiment Module', function() {
 
   after(function() {
     //Remove the temporary directory  
-    quickTemp.remove(directory, 'project');
-  })
+    //quickTemp.remove(directory, 'project');
+  });
 
   beforeEach(function() {
     ClientStub.prototype.createExperiment = utils.clientFunctionStub('1234');
     ClientStub.prototype.updateExperiment = utils.clientFunctionStub('1234');
     assert(fs.existsSync(directory.experiment), 'experiment folder not found');
-  })
+  });
 
   it('Should create a remote experiment', function(done) {
 
@@ -78,5 +82,30 @@ describe('Push Experiment Module', function() {
       done();
     }, 10);
   });
+  describe("Iterate Option",function(done) {
+    before(function(done) {
+      directory.variation = {};
+      directory.variation.a = directory.experiment + 'test-variation-a/';
+      directory.variation.b = directory.experiment + 'test-variation-b/';
+      options.multipleVariations = true;
 
-})
+
+      utils.init(options, utils.variation, [options, done]);
+
+      process.chdir(directory.project);
+
+    });
+    it('Should push multiple variations', function(done) {
+      utils.addIdToFile(directory.variation.a + 'variation.json', '4567');
+      utils.addIdToFile(directory.variation.b + 'variation.json', '4567');
+
+      pushExperiment(directory.experiment, {iterate: true});
+
+      setTimeout(function() {
+        assert(VariationClientStub.called, "pushVariation was not called");
+        done();
+      }, 10);
+
+    });
+  });
+});
