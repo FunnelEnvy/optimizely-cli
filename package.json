@@ -1,6 +1,6 @@
 {
   "name": "optimizely-cli",
-  "version": "0.15.1",
+  "version": "0.15.2",
   "description": "A command line application to create Optimizely experiments and publish via the API",
   "main": "index.js",
   "bin": {
@@ -30,8 +30,7 @@
     "lodash": "^2.4.1",
     "optimizely-node-client": "^0.1.0",
     "promptly": "^0.2.0",
-    "q": "^1.1.2",
-    "uglify-js": "^2.4.23"
+    "q": "^1.1.2"
   },
   "engines": {
     "node": "^0.10.32"
