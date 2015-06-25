@@ -30,7 +30,8 @@
     "lodash": "^2.4.1",
     "optimizely-node-client": "^0.1.0",
     "promptly": "^0.2.0",
-    "q": "^1.1.2"
+    "q": "^1.1.2",
+    "uglify-js": "^2.4.23"
   },
   "engines": {
     "node": "^0.10.32"
