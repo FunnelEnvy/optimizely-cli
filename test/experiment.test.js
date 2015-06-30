@@ -58,7 +58,7 @@ describe('Experiment Object', function (){
     });
   });
   after(function(done){
-    quickTemp.remove(directories, 'experiment');
+    quickTemp.remove(directories, 'project');
     done();
   })
   describe('#create()', function() {
@@ -202,6 +202,40 @@ describe('Experiment Object', function (){
       experiment.updateRemote(client);
       expect(functionCalls[0]).to.have.a.property('functionName', 'updateExperiment');
       expect(functionCalls[0][0]).to.deep.equal(expArgs);
+    });
+  });
+  describe('#getOptcliURL()', function(){
+    it('Should put it at the end with an &', function(){
+      var newURL = edit_url + '?myparam=true';
+      var experiment = new Experiment({
+        description: description,
+        edit_url: newURL
+      }, experimentPath+'1');
+      expect(experiment.getOptcliURL()).to.equal(newURL+'&optcli=activate');
+    });
+    it('Should put it at the end with a ?', function(){
+      var newURL = edit_url;
+      var experiment = new Experiment({
+        description: description,
+        edit_url: newURL
+      }, experimentPath+'1');
+      expect(experiment.getOptcliURL()).to.equal(newURL+'?optcli=activate');
+    });
+    it('Should put it before the hash with an &', function(){
+      var newURL = edit_url + '?mygetparam=true#myhashparam=true';
+      var experiment = new Experiment({
+        description: description,
+        edit_url: newURL
+      }, experimentPath+'1');
+      expect(experiment.getOptcliURL()).to.equal(newURL.replace('#','&optcli=activate#'));
+    });
+    it('Should put it before the hash with a ?', function(){
+      var newURL = edit_url + '#myhashparam=true';
+      var experiment = new Experiment({
+        description: description,
+        edit_url: newURL
+      }, experimentPath+'1');
+      expect(experiment.getOptcliURL()).to.equal(newURL.replace('#','?optcli=activate#'));
     });
   });
 });
