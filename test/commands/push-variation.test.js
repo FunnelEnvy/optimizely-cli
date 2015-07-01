@@ -22,7 +22,7 @@ var directory = {};
 
 var pushVariation = proxyquire('../../lib/commands/push-variation', { 'optimizely-node-client': ClientStub });
 
-describe('Push Experiment Module', function() {
+describe('Push Variation Module', function() {
   before(function(done) {
     //Create temporary project directory and enter it
     quickTemp.makeOrRemake(directory, 'project');
