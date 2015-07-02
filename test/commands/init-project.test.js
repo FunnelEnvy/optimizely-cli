@@ -2,23 +2,18 @@
 var fs = require('fs');
 
 var assert = require('chai').assert;
-var nexpect = require('nexpect');
 var quickTemp = require('quick-temp');
 
 var utils = require('../utils');
-
-var options = {
-  'cwd': __dirname
-};
 var directory = {};
 
-describe('Init Project Module' , function () {
+describe('Init Project Command' , function () {
   before(function (done) {
     //Create the temporary project folder and enter it
     quickTemp.makeOrRemake(directory, 'project');
-    options.cwd = directory.project;
     //Initialize the project
-    utils.init(options, done, []);
+    utils.init(directory.project);
+    done();
   });
   after(function (done) {
     quickTemp.remove(directory, 'project');
@@ -26,7 +21,7 @@ describe('Init Project Module' , function () {
   })
   it('Should create a project.json file', function (done) {
     fs.exists(directory.project + '/project.json', function (exists) {
-      assert(exists, 'project.json not found');
+      assert(exists, 'project.json does not exist');
       done();
     });
   });

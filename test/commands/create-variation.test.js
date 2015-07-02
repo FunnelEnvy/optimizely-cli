@@ -2,29 +2,29 @@
 var fs = require('fs');
 
 var assert = require('chai').assert;
-var nexpect = require('nexpect');
 var quickTemp = require('quick-temp');
 
 var utils = require('../utils.js');
-var options = {
-  'cwd': __dirname
-};
 var directory = {};
 
-describe('Create Variation Module', function () {
+describe('Create Variation Command', function () {
   before(function (done) {
 
     //Create temporary project directory
     quickTemp.makeOrRemake(directory, 'project');
-    options.cwd = directory.project;
+    directory.experiment = directory.project + '/test-experiment/';
     directory.variation = directory.project + '/test-experiment/test-variation';
     
     //Initialize a project, create experiment, and create a variation
-    utils.init(options, utils.experiment, [options, utils.variation, [options,done]]);
+    utils.init(directory.project);
+    utils.experiment(directory.experiment);
+    utils.variation(directory.experiment, '/test-variation', 'Variation 1');
+    done();
   });
-  after(function () {
+  after(function (done) {
     //Remove the project directory
     quickTemp.remove(directory, 'project');
+    done();
   });
   it('Should create a variation folder within the experiment folder', function (done) {
     fs.exists(directory.variation, function (exists) {
