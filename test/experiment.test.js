@@ -205,7 +205,7 @@ describe('Experiment Object', function (){
     });
   });
   describe('#getOptcliURL()', function(){
-    it('Should put it at the end with an &', function(){
+    it('Should put optcli=activate at the end with an &', function(){
       var newURL = edit_url + '?myparam=true';
       var experiment = new Experiment({
         description: description,
@@ -213,7 +213,7 @@ describe('Experiment Object', function (){
       }, experimentPath+'1');
       expect(experiment.getOptcliURL()).to.equal(newURL+'&optcli=activate');
     });
-    it('Should put it at the end with a ?', function(){
+    it('Should put optcli=activate at the end with a ?', function(){
       var newURL = edit_url;
       var experiment = new Experiment({
         description: description,
@@ -221,7 +221,7 @@ describe('Experiment Object', function (){
       }, experimentPath+'1');
       expect(experiment.getOptcliURL()).to.equal(newURL+'?optcli=activate');
     });
-    it('Should put it before the hash with an &', function(){
+    it('Should put optcli=activate before the hash with an &', function(){
       var newURL = edit_url + '?mygetparam=true#myhashparam=true';
       var experiment = new Experiment({
         description: description,
@@ -229,7 +229,7 @@ describe('Experiment Object', function (){
       }, experimentPath+'1');
       expect(experiment.getOptcliURL()).to.equal(newURL.replace('#','&optcli=activate#'));
     });
-    it('Should put it before the hash with a ?', function(){
+    it('Should put optcli=activate before the hash with a ?', function(){
       var newURL = edit_url + '#myhashparam=true';
       var experiment = new Experiment({
         description: description,
