@@ -7,7 +7,7 @@
     "optcli": "bin/optcli.js"
   },
   "scripts": {
-    "test": "mocha test"
+    "test": "mocha && istanbul report text-summary lcov"
   },
   "repository": "git@github.com:FunnelEnvy/optimizely-cli.git",
   "keywords": [
@@ -38,6 +38,7 @@
   "devDependencies": {
     "chai": "^1.10.0",
     "coveralls": "^2.11.2",
+    "istanbul": "^0.3.17",
     "mocha": "^2.1.0",
     "mocha-lcov-reporter": "0.0.2",
     "nexpect": "^0.4.2",
