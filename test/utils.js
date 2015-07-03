@@ -1,76 +1,58 @@
 /**
  * Utility functions for tests
  */
-var nexpect = require('nexpect');
 var assert = require('chai').assert;
 var fs = require('fs');
 var Promise = require('bluebird');
 
 var optcli = __dirname + "/../bin/optcli.js";
 var utils = {};
+var initProject = require('../lib/commands/init-project.js');
+var createExperiment = require('../lib/commands/create-experiment.js');
+var createVariation = require('../lib/commands/create-variation.js');
 
+
+var experimentName = 'Test Experiment';
+var editURL = 'http://example.com'; 
+var projectID = 12345;
 
 /**
  * Initializes a project within the cwd
  * specified in the options object
  */
-utils.init = function(options, done, args) {
-  args = args || [];
-  nexpect.spawn(optcli, ['init', 'projectId'], options)
-    .run(function(err) {
-      assert(!err, 'Error while initializing a project');
-      done.apply(this, args)
-    });
+utils.init = function(directory) {
+  var initialDir = __dirname;
+  var program = {remote: false, jquery: true};
+  process.chdir(directory);
+  initProject(projectID, program);
+  return {
+    directory: directory,
+    id: projectID
+  },
+  process.chdir(initialDir);
 }
 
 /**
  * Creates an experiment within the cwd
  * specified in the options object
  */
-utils.experiment = function(options, done, args) {
-  args = args || [];
-  nexpect.spawn(optcli, ['experiment', 'test-experiment', '"Test Experiment"',
-      'http://example.com'
-    ], options)
-    .run(function(err) {
-      assert(!err, 'Error while creating experiment');
-      done.apply(this, args);
-    });
+utils.experiment = function(directory, options) {
+  if(!options) options = {};
+  createExperiment(directory, experimentName, editURL, options);
+  return {
+    directory: directory,
+    name: experimentName,
+    editURL: editURL
+  }
 }
 
 /**
  * Creates a variation within the cwd
  * specified in the options object
  */
-utils.variation = function(options, done, args) {
-  args = args || [];
-
-  if(options.multipleVariations){
-
-    nexpect.spawn(optcli, ['variation', 'test-experiment', 'test-variation-a',
-        '"Test Variation A"'
-      ], options)
-      .run(function(err) {
-        assert(!err, 'Error when creating first variation ' + err);
-        nexpect.spawn(optcli, ['variation', 'test-experiment', 'test-variation-b',
-          '"Test Variation B"'
-        ], options)
-        .run(function(err) {
-          assert(!err, 'Error when creating second variation ' + err);
-          done.apply(this, args);
-        });
-      });
-    
-  } else {
-    nexpect.spawn(optcli, ['variation', 'test-experiment', 'test-variation',
-        '"Test Variation"'
-      ], options)
-      .run(function(err) {
-        assert(!err, 'Error when creating variation ' + err);
-        done.apply(this, args);
-      });
-  }
-  
+utils.variation = function(experimentDirectory, variationFolder, variationName) {
+  program = {};
+  createVariation(experimentDirectory, variationFolder, variationName, program);
 }
 
 /**
