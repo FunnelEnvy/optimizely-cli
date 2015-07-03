@@ -9,3 +9,5 @@ node_modules/
 .npmrc
 
 tmp/
+coverage/
+.coveralls.yml
