@@ -20,9 +20,15 @@ var projectID = 12345;
  * Initializes a project within the cwd
  * specified in the options object
  */
-utils.init = function(directory) {
+utils.init = function(directory, options) {
+  var include_jquery;
+  if(options && options.jquery) {
+    include_jquery = options.jquery;
+  } else {
+    include_jquery = false;
+  }
   var initialDir = __dirname;
-  var program = {remote: false, jquery: true};
+  var program = {remote: false, jquery: include_jquery};
   process.chdir(directory);
   initProject(projectID, program);
   return {
