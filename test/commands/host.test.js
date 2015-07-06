@@ -3,18 +3,19 @@ var http = require('http');
 var Promise = require('bluebird');
 var fs = require('fs');
 Promise.promisifyAll(fs);
-var Browser = require('zombie');
 var quickTemp = require('quick-temp');
 var assert = require('chai').assert;
 var expect = require('chai').expect;
+var intercept = require('intercept-stdout');
 
 var utils = require('../utils.js');
+var host = require('../../lib/commands/host.js');
 
 var directory = {};
 var variationJS = '$(\'body\').addClass(\'test\')';
 var experimentJS = 'function myFunc(){console.log("testing is fun");}';
 var CSS = '.test {background: blue}';
-var childProcess, browser;
+var server, browser, oldDir;
 
 describe('Host Command', function(){
   before(function(done){
@@ -38,23 +39,17 @@ describe('Host Command', function(){
       .catch(function(error){
         assert(false, 'Could not add css/javascript to files');
       }); 
-
-    childProcess = ChildProcess.spawn('optcli', ['host', 'test-experiment/test-variation'], {cwd: directory.project})
-      .on('error', function(err){
-        assert.ifError(err);
-      });
-    childProcess.stdout.on('data', function(message){
-        done();
-      });  
-    browser = Browser.create();
-    
+    oldDir = process.cwd();
+    process.chdir(directory.project);
+    server = host(directory.variation, 9569 , {ssl: false, silence: true});
+    done();
   });
   after(function(done){
-    childProcess.kill();
-    done();
+    process.chdir(oldDir);
+    server.close(done);
   })
   it('Should host the landing page on the default port', function(done){
-    http.get('http://localhost:8080/', function(res){
+    http.get('http://localhost:9569/', function(res){
       expect(res.statusCode).to.equal(200);
       done();
     }).on('error', function(err) {
@@ -63,19 +58,19 @@ describe('Host Command', function(){
     });
   });
   it('Should host variation.js', function(done){
-    http.get('http://localhost:8080/variation.js', function(res){
+    http.get('http://localhost:9569/variation.js', function(res){
       expect(res.statusCode).to.equal(200);
       done();
     }).on('error', function(err){
-      console.log('Got error:' + err.message)
+      console.log('Got error:' + err.message);
     });
   });
   it('Should host variation.css', function(done){
-    http.get('http://localhost:8080/variation.css', function(res){
+    http.get('http://localhost:9569/variation.css', function(res){
       expect(res.statusCode).to.equal(200);
       done();
     }).on('error', function(err){
-      console.log('Got error:' + err.message)
+      console.log('Got error:' + err.message);
     });
   })
 });
