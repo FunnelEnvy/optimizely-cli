@@ -18,9 +18,10 @@ describe('Create Experiment Command', function () {
     utils.experiment(directory.experiment);
     done();
   });
-  after(function () {
+  after(function (done) {
     //Remove the temporary directory
     quickTemp.remove(directory, 'project');
+    done();
   });
   it('Should create a folder called test-experiment', function (done) {
     fs.exists(directory.experiment, function (exists) {

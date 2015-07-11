@@ -45,6 +45,7 @@ quickTemp.makeOrRemake(directories, 'project');
 var experimentPath = directories.project + folder;
 
 describe('Experiment Object', function (){
+
   before(function(done){
     experiment = Experiment.create({
       description: description,
@@ -58,10 +59,12 @@ describe('Experiment Object', function (){
       }
     });
   });
+
   after(function(done){
     quickTemp.remove(directories, 'project');
     done();
-  })
+  });
+
   describe('#create()', function() {
     it('Should create an experiment directory', function (done){
       fs.exists(experimentPath, function(exists){
@@ -95,6 +98,7 @@ describe('Experiment Object', function (){
       expect(experiment).to.be.an.instanceOf(Experiment);
     });
   });
+
   describe('#locateAndLoad()', function(){
     var experiment;
     before(function(done){
@@ -111,18 +115,21 @@ describe('Experiment Object', function (){
       expect(experiment.attributes).to.deep.equal(experimentData);
     });
   });
+
   describe('#getJSPath()', function(){
     it('Should return the JS Path', function(){
       var experiment = Experiment.locateAndLoad(experimentPath);
       expect(experiment.getJSPath()).to.equal(experimentPath + '/global.js');
     })
   });
+
   describe('#getCSSPath()', function(){
     it('Should return the CSS Path', function(){
       var experiment = Experiment.locateAndLoad(experimentPath);
       expect(experiment.getCSSPath()).to.equal(experimentPath + '/global.css');
     })
   });
+
   describe('#getCSS()',function(){
     it('Should return global.css contents', function(done){
       var mockCSS = '.my-class {background: white;}';
@@ -133,6 +140,7 @@ describe('Experiment Object', function (){
       });
     });
   });
+
   describe('#getJS()', function(){
     it('Should return global.js contents', function(done){
       var mockJS = '$(\'body\').addClass(\'my-class\');';
@@ -144,6 +152,7 @@ describe('Experiment Object', function (){
       });
     });
   });
+
   describe('#getVariations()', function(){
     before(function(done){
       variationOne = experimentPath + '/variation1';
@@ -161,6 +170,7 @@ describe('Experiment Object', function (){
       expect(experiment.getVariations()).to.deep.equal([variationOne + '/variation.json', variationTwo + '/variation.json']);
     })
   });
+
   describe('#createRemote()', function(){
     it('Should create a remote experiment', function(){
 
@@ -205,6 +215,7 @@ describe('Experiment Object', function (){
       expect(functionCalls[0][0]).to.deep.equal(expArgs);
     });
   });
+  
   describe('#getOptcliURL()', function(){
     it('Should put optcli=activate at the end with an &', function(){
       var newURL = edit_url + '?myparam=true';

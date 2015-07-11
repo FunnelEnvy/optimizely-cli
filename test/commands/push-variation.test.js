@@ -18,7 +18,7 @@ var options = {
   'cwd': __dirname
 };
 var directory = {};
-
+var currentDir;
 var pushVariation = proxyquire('../../lib/commands/push-variation', { 'optimizely-node-client': ClientStub });
 
 describe('Push Variation Command', function() {
@@ -34,6 +34,7 @@ describe('Push Variation Command', function() {
     utils.experiment(directory.experiment);
     utils.variation(directory.experiment, 'test-variation', 'test-variation');
     utils.createOptimizelyToken(directory.project);
+    currentDir = process.cwd();
     process.chdir(directory.project);
     done();
   });
@@ -41,6 +42,7 @@ describe('Push Variation Command', function() {
   after(function(done) {
     //Remove the temporary directory  
     quickTemp.remove(directory, 'project');
+    process.chdir(currentDir);
     done();
   })
 
