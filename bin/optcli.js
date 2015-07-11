@@ -52,7 +52,7 @@ program
 
 program
   .command("push-experiment <path>")
-  .option("-i --iterate", "Push experiment iterate through all variations")
+  .option("-i --iterate", "Push experiment and iterate through all variations")
   .description("Push an experiment to Optimizely")
   .action(loadCommand("push-experiment"));
 
@@ -61,6 +61,11 @@ program
   .description(
     "Push a variation to Optimizely (experiment must be pushed first)")
   .action(loadCommand("push-variation"));
+
+program
+  .command("set-token [token]")
+  .description("Set the optimizely API token in a project folder")
+  .action(loadCommand("set-token"));
 
 //Show help if no arguments are passed
 if (!process.argv.slice(2).length) {

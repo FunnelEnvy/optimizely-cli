@@ -47,6 +47,8 @@ describe('Host Command', function(){
   after(function(done){
     process.chdir(oldDir);
     server.close();
+    //Remove the temporary directory
+    quickTemp.remove(directory, 'project');
     done();
   });
   it('Should host the landing page on the default port', function(done){
