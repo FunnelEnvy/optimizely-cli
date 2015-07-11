@@ -47,6 +47,7 @@ program
 program
   .command("host <path> [port]")
   .option("-s --ssl", "SSL")
+  .option("-o --open", "Open the localhost index page")
   .description("Host variation locally")
   .action(loadCommand("host"));
 
