@@ -9,6 +9,7 @@ var Project = require('../lib/project.js');
 var Experiment = require('../lib/experiment.js');
 var Variation = require('../lib/variation.js');
 var functionCalls = [];
+
 /**
  * Used to push any function calls and their 
  * arguments to the funcitonCalls array. We 

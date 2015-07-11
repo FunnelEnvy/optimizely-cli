@@ -31,11 +31,12 @@ utils.init = function(directory, options) {
   var program = {remote: false, jquery: include_jquery};
   process.chdir(directory);
   initProject(projectID, program);
+  
+  process.chdir(initialDir);
   return {
     directory: directory,
     id: projectID
-  },
-  process.chdir(initialDir);
+  }
 }
 
 /**
