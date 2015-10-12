@@ -2,7 +2,6 @@ var fs = require('fs');
 
 var chai = require("chai");
 var assert = chai.assert;
-var nexpect = require('nexpect');
 var quickTemp = require('quick-temp');
 var proxyquire = require('proxyquire');
 var sinon = require('sinon');
@@ -22,7 +21,7 @@ var directory = {};
 
 var pushVariation = proxyquire('../../lib/commands/push-variation', { 'optimizely-node-client': ClientStub });
 
-describe('Push Experiment Module', function() {
+describe('Push Variation Command', function() {
   before(function(done) {
     //Create temporary project directory and enter it
     quickTemp.makeOrRemake(directory, 'project');
@@ -31,14 +30,18 @@ describe('Push Experiment Module', function() {
     directory.variation = directory.project + '/test-experiment/test-variation/';
 
     //Initialize the project and create experiment
-    utils.init(options, utils.experiment, [options, utils.variation, [options,done]]);
+    utils.init(directory.project);
+    utils.experiment(directory.experiment);
+    utils.variation(directory.experiment, 'test-variation', 'test-variation');
     utils.createOptimizelyToken(directory.project);
     process.chdir(directory.project);
+    done();
   });
 
-  after(function() {
+  after(function(done) {
     //Remove the temporary directory  
     quickTemp.remove(directory, 'project');
+    done();
   })
 
   beforeEach(function() {

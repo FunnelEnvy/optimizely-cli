@@ -1,13 +1,13 @@
 {
   "name": "optimizely-cli",
-  "version": "0.15.1",
+  "version": "0.15.4",
   "description": "A command line application to create Optimizely experiments and publish via the API",
   "main": "index.js",
   "bin": {
     "optcli": "bin/optcli.js"
   },
   "scripts": {
-    "test": "mocha test"
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec"
   },
   "repository": "git@github.com:FunnelEnvy/optimizely-cli.git",
   "keywords": [
@@ -37,8 +37,12 @@
   },
   "devDependencies": {
     "chai": "^1.10.0",
+    "codeclimate-test-reporter": "^0.1.0",
+    "coveralls": "^2.11.2",
+    "intercept-stdout": "^0.1.1",
+    "istanbul": "^0.3.17",
     "mocha": "^2.1.0",
-    "nexpect": "^0.4.2",
+    "mocha-lcov-reporter": "0.0.2",
     "proxyquire": "^1.3.1",
     "quick-temp": "^0.1.2",
     "sinon": "^1.12.2"

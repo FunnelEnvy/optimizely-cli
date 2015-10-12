@@ -2,7 +2,6 @@ var fs = require('fs');
 
 var chai = require("chai");
 var assert = chai.assert;
-var nexpect = require('nexpect');
 var quickTemp = require('quick-temp');
 var proxyquire = require('proxyquire');
 var sinon = require('sinon');
@@ -26,7 +25,7 @@ var pushExperiment = proxyquire('../../lib/commands/push-experiment', {
   './push-variation': VariationClientStub
  });
 
-describe('Push Experiment Module', function() {
+describe('Push Experiment Command', function() {
   before(function(done) {
     //Create temporary project directory and enter it
     quickTemp.makeOrRemake(directory, 'project');
@@ -34,15 +33,17 @@ describe('Push Experiment Module', function() {
     directory.experiment = directory.project + '/test-experiment/';
 
     //Initialize the project and create experiment
-    utils.init(options, utils.experiment, [options, done]);
+    utils.init(directory.project);
+    utils.experiment(directory.experiment)
     utils.createOptimizelyToken(directory.project);
     process.chdir(directory.project);
+    done();
   });
 
 
   after(function() {
     //Remove the temporary directory  
-    //quickTemp.remove(directory, 'project');
+    quickTemp.remove(directory, 'project');
   });
 
   beforeEach(function() {
@@ -84,16 +85,18 @@ describe('Push Experiment Module', function() {
   });
   describe("Iterate Option",function(done) {
     before(function(done) {
+      var variationAFolder = 'test-variation-a/';
+      var variationBFolder = 'test-variation-b/';
       directory.variation = {};
-      directory.variation.a = directory.experiment + 'test-variation-a/';
-      directory.variation.b = directory.experiment + 'test-variation-b/';
+      directory.variation.a = directory.experiment + variationAFolder;
+      directory.variation.b = directory.experiment + variationBFolder;
       options.multipleVariations = true;
 
 
-      utils.init(options, utils.variation, [options, done]);
-
+      utils.variation(directory.experiment, variationAFolder, 'Variation A');
+      utils.variation(directory.experiment, variationBFolder, 'Variation B');
       process.chdir(directory.project);
-
+      done();
     });
     it('Should push multiple variations', function(done) {
       utils.addIdToFile(directory.variation.a + 'variation.json', '4567');
