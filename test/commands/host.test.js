@@ -4,12 +4,12 @@ var Promise = require('bluebird');
 var fs = require('fs');
 Promise.promisifyAll(fs);
 var quickTemp = require('quick-temp');
-var assert = require('chai').assert;
 var expect = require('chai').expect;
-var intercept = require('intercept-stdout');
+var spy = require('sinon').spy;
 
 var utils = require('../utils.js');
-var host = require('../../lib/commands/host.js');
+var openSpy = spy();
+var host = require('proxyquire')('../../lib/commands/host.js', {'open': openSpy});
 
 var directory = {};
 var variationJS = '$(\'body\').addClass(\'test\'); $("body").append("<%-files.test %>");';
@@ -54,6 +54,8 @@ describe('Host Command', function(){
   after(function(done){
     process.chdir(oldDir);
     server.close();
+    //Remove the temporary directory
+    quickTemp.remove(directory, 'project');
     done();
   });
   it('Should host the landing page on the default port', function(done){
@@ -98,5 +100,12 @@ describe('Host Command', function(){
     }).on('error', function(err){
       console.log('Got error:' + err.message);
     });
+  });
+  describe('Open flag', function(){
+    it('Should run the open command', function(done){
+      expect(openSpy.called).to.be.true;
+      done();
+    });
   })
+  
 });
