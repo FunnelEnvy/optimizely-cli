@@ -2,6 +2,8 @@ var fs = require('fs');
 var chai = require('chai');
 chai.config.truncateThreshold = 0; // disable truncating
 var expect = chai.expect;
+var path = require('path');
+var slash = path.sep;
 var proxyquire = require('proxyquire');
 var quickTemp = require('quick-temp');
 var _ = require('lodash');
@@ -32,7 +34,7 @@ var recordFunctionCalls = function(functionName, returnObject){
 };
 
 var experiment;
-var folder = '/new-experiment';
+var folder = slash + 'new-experiment';
 var description = 'My new experiment';
 var edit_url = 'http://www.example.com';
 var project_id = 154321;
@@ -51,7 +53,7 @@ describe('Experiment Object', function (){
       description: description,
       edit_url: edit_url
     }, experimentPath);
-    fs.writeFile(directories.project + '/project.json', '{"id":"'+project_id+'","include_jquery":"false","project_name":"my project"}', function(err){
+    fs.writeFile(directories.project + slash + 'project.json', '{"id":"'+project_id+'","include_jquery":"false","project_name":"my project"}', function(err){
       if(!err){
         done()
       } else {
@@ -73,19 +75,19 @@ describe('Experiment Object', function (){
       done();
     });
     it('Should create a global.css file', function(done){
-      fs.exists(experimentPath + '/global.css', function(exists){
+      fs.exists(experimentPath + slash + 'global.css', function(exists){
         expect(exists).to.be.true;
         done();
       })
     });
     it('Should create a global.js file', function(done){
-      fs.exists(experimentPath + '/global.js', function(exists){
+      fs.exists(experimentPath + slash + 'global.js', function(exists){
         expect(exists).to.be.true;
         done();
       })
     });
     it('Should create an experiment.json file', function(done){
-      fs.readFile(experimentPath + '/experiment.json', function(err, data){
+      fs.readFile(experimentPath + slash + 'experiment.json', function(err, data){
         expect(err).to.be.null;
         expect(JSON.parse(data)).to.deep.equal({
           'description': description, 
@@ -119,21 +121,21 @@ describe('Experiment Object', function (){
   describe('#getJSPath()', function(){
     it('Should return the JS Path', function(){
       var experiment = Experiment.locateAndLoad(experimentPath);
-      expect(experiment.getJSPath()).to.equal(experimentPath + '/global.js');
+      expect(experiment.getJSPath()).to.equal(experimentPath + slash + 'global.js');
     })
   });
 
   describe('#getCSSPath()', function(){
     it('Should return the CSS Path', function(){
       var experiment = Experiment.locateAndLoad(experimentPath);
-      expect(experiment.getCSSPath()).to.equal(experimentPath + '/global.css');
+      expect(experiment.getCSSPath()).to.equal(experimentPath + slash + 'global.css');
     })
   });
 
   describe('#getCSS()',function(){
     it('Should return global.css contents', function(done){
       var mockCSS = '.my-class {background: white;}';
-      fs.writeFile(experimentPath + '/global.css', mockCSS, function(err, data){
+      fs.writeFile(experimentPath + slash + 'global.css', mockCSS, function(err, data){
         var experiment = Experiment.locateAndLoad(experimentPath);
         expect(experiment.getCSS()).to.equal(mockCSS);
         done();
@@ -144,7 +146,7 @@ describe('Experiment Object', function (){
   describe('#getJS()', function(){
     it('Should return global.js contents', function(done){
       var mockJS = '$(\'body\').addClass(\'my-class\');';
-      fs.writeFile(experimentPath + '/global.js', mockJS, function(err, data){
+      fs.writeFile(experimentPath + slash + 'global.js', mockJS, function(err, data){
         expect(err).to.be.null;
         var experiment = Experiment.locateAndLoad(experimentPath);
         expect(experiment.getJS()).to.equal(mockJS);
@@ -155,8 +157,8 @@ describe('Experiment Object', function (){
 
   describe('#getVariations()', function(){
     before(function(done){
-      variationOne = experimentPath + '/variation1';
-      variationTwo = experimentPath + '/variation2';
+      variationOne = experimentPath + slash + 'variation1';
+      variationTwo = experimentPath + slash + 'variation2';
       Variation.create({
         description: description,
       }, variationOne);
@@ -167,7 +169,10 @@ describe('Experiment Object', function (){
     })
     it('Should return an array with location of variations', function(){
       var experiment = Experiment.locateAndLoad(experimentPath);
-      expect(experiment.getVariations()).to.deep.equal([variationOne + '/variation.json', variationTwo + '/variation.json']);
+      // Convert Windows slashes to Unix slashes for comparison
+      var var1Path = (variationOne + slash + 'variation.json').replace(/\\/g, '/');
+      var var2Path = (variationTwo + slash + 'variation.json').replace(/\\/g, '/');
+      expect(experiment.getVariations()).to.deep.equal([var1Path, var2Path]);
     })
   });
 
