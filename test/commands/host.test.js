@@ -12,8 +12,9 @@ var utils = require('../utils.js');
 var host = require('../../lib/commands/host.js');
 
 var directory = {};
-var variationJS = '$(\'body\').addClass(\'test\')';
+var variationJS = '$(\'body\').addClass(\'test\'); $("body").append("<%-files.test %>");';
 var experimentJS = 'function myFunc(){console.log("testing is fun");}';
+var fileHTML = '<div class="file-test">\n\tThis is a file test\n</div>';
 var CSS = '.test {background: blue}';
 var server, browser, oldDir;
 
@@ -36,13 +37,19 @@ describe('Host Command', function(){
       .then(function(){
         return fs.writeFileAsync(directory.experiment + '/experiment.js', experimentJS);
       })
+      .then(function(){
+        return fs.writeFileAsync(directory.experiment + '/test.html', fileHTML);
+      })
+      .then(function() {
+        oldDir = process.cwd();
+        process.chdir(directory.project);
+        server = host(directory.variation, 9569 , {ssl: false, silence: true});
+        done();
+      })
       .catch(function(error){
         assert(false, 'Could not add css/javascript to files');
-      }); 
-    oldDir = process.cwd();
-    process.chdir(directory.project);
-    server = host(directory.variation, 9569 , {ssl: false, silence: true});
-    done();
+        done();
+      });
   });
   after(function(done){
     process.chdir(oldDir);
@@ -55,16 +62,34 @@ describe('Host Command', function(){
       done();
     }).on('error', function(err) {
       console.log("Got error: " + err.message);
-      done(e);
-    });
+      done(err);
+    })
   });
+  
+  // Store the contents of variation.js so they can be used in the next assertion.
+  var resJS = '';
   it('Should host variation.js', function(done){
-    http.get('http://localhost:9569/variation.js', function(res){
+    request = http.get('http://localhost:9569/variation.js', function(res){
       expect(res.statusCode).to.equal(200);
-      done();
     }).on('error', function(err){
       console.log('Got error:' + err.message);
-    });
+      done();
+    }).on('response', function(res) {
+      res.on('readable', function() {
+        resJS += res.read().toString('utf8');
+      })
+      res.on('end', function() {
+        done();
+      });
+      res.on('error', function(err) {
+        console.log('Got error:' + err.message);
+        done();
+      });
+    });;
+  });
+  it('Should compile an external file using EJS', function(done) {
+    expect(resJS).to.contain('<div class=\\"file-test\\">This is a file test</div>');
+    done();
   });
   it('Should host variation.css', function(done){
     http.get('http://localhost:9569/variation.css', function(res){
