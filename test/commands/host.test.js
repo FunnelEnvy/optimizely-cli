@@ -41,13 +41,14 @@ describe('Host Command', function(){
         return fs.writeFileAsync(directory.experiment + '/test.html', fileHTML);
       })
       .then(function() {
+        // Don't host until all files are created, or test.html might be empty/non-existent
         oldDir = process.cwd();
         process.chdir(directory.project);
-        server = host(directory.variation, 9569 , {ssl: false, silence: true});
+        server = host(directory.variation, 9569 , {ssl: false, silence: true, open: true});
         done();
       })
       .catch(function(error){
-        assert(false, 'Could not add css/javascript to files');
+        expect(error).to.be.null;
         done();
       });
   });
@@ -65,13 +66,13 @@ describe('Host Command', function(){
     }).on('error', function(err) {
       console.log("Got error: " + err.message);
       done(err);
-    })
+    });
   });
   
   // Store the contents of variation.js so they can be used in the next assertion.
   var resJS = '';
   it('Should host variation.js', function(done){
-    request = http.get('http://localhost:9569/variation.js', function(res){
+    http.get('http://localhost:9569/variation.js', function(res){
       expect(res.statusCode).to.equal(200);
     }).on('error', function(err){
       console.log('Got error:' + err.message);
@@ -80,6 +81,7 @@ describe('Host Command', function(){
       res.on('readable', function() {
         resJS += res.read().toString('utf8');
       })
+      // Don't call done() until resJS is completely populated.
       res.on('end', function() {
         done();
       });
