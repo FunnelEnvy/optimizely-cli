@@ -35,7 +35,7 @@ optcli init [options] [project_id]
 Initializes a new Optimizely project locally (use `-r` for remote).
 
 ```
-optcli experiment <experiment> <folder> <description>
+optcli experiment <folder> <description> <url>
 ```
 Create a local experiment
 
