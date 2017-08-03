@@ -52,6 +52,11 @@ program
   .action(loadCommand("host"));
 
 program
+  .command("pull <experiment_id>")
+  .description("Pull an (Optimizely X) experiment and create a folder")
+  .action(loadCommand("pull"));
+
+program
   .command("push-experiment <path>")
   .option("-i --iterate", "Push experiment and iterate through all variations")
   .description("Push an experiment to Optimizely")
