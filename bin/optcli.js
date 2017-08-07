@@ -57,6 +57,11 @@ program
   .action(loadCommand("pull"));
 
 program
+  .command("push <path>")
+  .description("Push an Optimizely X Experiment (and Variations)")
+  .action(loadCommand("push"));
+
+program
   .command("push-experiment <path>")
   .option("-i --iterate", "Push experiment and iterate through all variations")
   .description("Push an experiment to Optimizely")
