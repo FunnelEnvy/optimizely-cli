@@ -3,6 +3,8 @@
 [![Codeship Status for FunnelEnvy/optimizely-cli](https://codeship.com/projects/3b6cfc10-040d-0133-0e10-62fced7320b0/status?branch=master)](https://codeship.com/projects/89330)    
 [![Code Climate](https://codeclimate.com/github/FunnelEnvy/optimizely-cli/badges/gpa.svg)](https://codeclimate.com/github/FunnelEnvy/optimizely-cli) [![Test Coverage](https://codeclimate.com/github/FunnelEnvy/optimizely-cli/badges/coverage.svg)](https://codeclimate.com/github/FunnelEnvy/optimizely-cli/coverage)
 
+Working with Optimizely X? Check out the [Optimizely X CLI](https://github.com/teamroboboogie/x-optimizely-cli) from @teamroboboogie!
+
 Optimizely-CLI (optcli) is a command line tool that lets developers build experiments faster by using the sofware tools you already love and publish to Optimizely when ready. We build a lot of tests at [FunnelEnvy](http://www.funnelenvy.com) and found that (being stubborn engineers) we were more comfortable using our source editors and Git to develop locally - and this had a *significant* positive impact on our test velocity.
 
 Optimizely-cli includes a command line executable that also integrates with either the[Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en) (Google Chrome) or [Greasemonkey](https://addons.mozilla.org/en-US/firefox/addon/greasemonkey/) (Firefox) extensions for local development / preview and the Optimizely API for publishing tests.
